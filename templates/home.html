@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delivery Route Optimizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f8ff;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>Delivery Route Optimizer</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <label>Enter locations (x,y;x,y;x,y)</label>
+    <label>Warehouse Location (x,y)</label>
+    <input type="text" name="warehouse" placeholder="0,0" required>
+    <input type="text" name="locations" placeholder="1,2;3,4;5,6" required>
+    <button type="submit">Calculate Route</button>
+</form>
+
+{% if result %}
+<div class="result">
+
+    <h4>Warehouse:</h4>
+    <p>{{ result.warehouse }}</p>
+
+    <h4>Optimized Route:</h4>
+    <p>{{ result.route }}</p>
+
+    <h4>Total Distance:</h4>
+    <p><strong>{{ result.distance }}</strong></p>
+
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
